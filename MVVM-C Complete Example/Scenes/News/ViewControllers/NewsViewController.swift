@@ -12,32 +12,35 @@ import RxSwift
 class NewsViewController : UIViewController {
   var viewModel : NewsViewModel?
   let disposeBag = DisposeBag()
+  @IBOutlet var collectionView: UICollectionView!
+
   public override func viewDidLoad() {
     super.viewDidLoad()
     bindViewModel()
   }
   func bindViewModel() {
-//      viewModel.newsCells.bind(to: self.tableView.rx.items) { tableView, index, element in
-//          let indexPath = IndexPath(item: index, section: 0)
-//          switch element {
-//          case .normal(let viewModel):
-//              guard let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as? FriendTableViewCell else {
-//                  return UITableViewCell()
-//              }
-//              cell.viewModel = viewModel
-//              return cell
-//          case .error(let message):
-//              let cell = UITableViewCell()
-//              cell.isUserInteractionEnabled = false
-//              cell.textLabel?.text = message
-//              return cell
-//          case .empty:
-//              let cell = UITableViewCell()
-//              cell.isUserInteractionEnabled = false
-//              cell.textLabel?.text = "No data available"
-//              return cell
-//          }
-//      }.disposed(by: disposeBag)
+    if let model = viewModel {
+      model.newsCells.bind(to: self.collectionView.rx.items) { collectionView, index, element in
+        let indexPath = IndexPath(item: index, section: 0)
+        switch element {
+        case .normal(let viewModel):
+          guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "articleCell", for: indexPath) as? ArticleCollectionViewCell else {
+              return UICollectionViewCell()
+          }
+          cell.viewModel = viewModel
+          return cell
+        case .error(let message):
+          let cell = UICollectionViewCell()
+          cell.isUserInteractionEnabled = false
+          return cell
+        case .empty:
+          let cell = UICollectionViewCell()
+          cell.isUserInteractionEnabled = false
+          return cell
+        }
+      }.disposed(by: disposeBag)
+    }
+   
 //
 //      viewModel
 //          .onShowError

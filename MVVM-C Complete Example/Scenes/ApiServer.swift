@@ -17,7 +17,7 @@ class ApiServer {
                 let jsonData = try! Data(contentsOf: URL(fileURLWithPath: path))
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let articles = try JSONDecoder().decode(Articles.self, from: jsonData)
+                let articles = try decoder.decode(Articles.self, from: jsonData)
                 observer.onNext(articles.articles)
               }
             } catch {
