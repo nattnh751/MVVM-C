@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import RxSwift
 
-class NewsViewController : UIViewController {
+class NewsViewController : UIViewController, UICollectionViewDelegateFlowLayout {
   var viewModel : NewsViewModel?
   let disposeBag = DisposeBag()
   @IBOutlet var collectionView: UICollectionView!
@@ -39,6 +39,7 @@ class NewsViewController : UIViewController {
           return cell
         }
       }.disposed(by: disposeBag)
+      self.collectionView.rx.setDelegate(self).disposed(by: disposeBag)
     }
    
 //
@@ -55,4 +56,9 @@ class NewsViewController : UIViewController {
 //          .disposed(by: disposeBag)
   }
 
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+      let width = collectionView.bounds.width
+      let cellWidth = (width - 30) / 1 // compute your cell width
+      return CGSize(width: cellWidth, height: 150)
+  }
 }

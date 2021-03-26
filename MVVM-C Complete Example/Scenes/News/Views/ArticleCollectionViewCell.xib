@@ -34,6 +34,9 @@
                 <constraint firstItem="Fn9-ws-B2n" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="45" id="ihe-HA-8kK"/>
             </constraints>
             <size key="customSize" width="654" height="100"/>
+            <connections>
+                <outlet property="articleTitle" destination="Fn9-ws-B2n" id="40r-k7-ANR"/>
+            </connections>
             <point key="canvasLocation" x="569.56521739130437" y="136.60714285714286"/>
         </collectionViewCell>
     </objects>
