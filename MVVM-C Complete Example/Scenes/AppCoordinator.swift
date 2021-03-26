@@ -10,21 +10,25 @@ import UIKit
 
 class AppCoordinator : Coordinator {
   
- let window: UIWindow?
-
- init(window: UIWindow?) {
-     self.window = window
- }
-
- override func start() {
-    let newwsCoordinator = NewsCoordinator(delegate: self)
+  let window: UIWindow?
+  init(window: UIWindow?) {
+    self.window = window
+  }
+  
+  let apiServer: ApiServer = {
+      let apiClient = ApiServer()
+      return apiClient
+  }()
+  
+  override func start() {
+    let newwsCoordinator = NewsCoordinator(delegate: self, apiServer: apiServer)
     addChildCoordinator(newwsCoordinator)
     newwsCoordinator.start()
- }
+  }
 
- override func finish() {
-    
- }
+  override func finish() {
+      
+  }
 
 }
 extension AppCoordinator : NewsDelegate {

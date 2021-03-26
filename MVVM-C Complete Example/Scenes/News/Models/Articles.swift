@@ -20,3 +20,10 @@ public struct Article : Codable {
   var heroImage : URL
   var link : URL
 }
+class DefaultDateFormatter: StaticDateFormatterInterface {
+    static var value: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        return dateFormatter
+    }()
+}

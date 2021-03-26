@@ -18,10 +18,10 @@ class NewsCoordinator: Coordinator {
   let delegate : NewsDelegate
 
   let storyboard = UIStoryboard(name: "News", bundle: nil)
-
+  let apiServer: ApiServer
   // MARK: VM / VC's
   lazy var newsViewModel: NewsViewModel! = {
-      let viewModel = NewsViewModel()
+    let viewModel = NewsViewModel(self.apiServer)
       viewModel.coordinatorDelegate = self 
       return viewModel
   }()
@@ -31,8 +31,9 @@ class NewsCoordinator: Coordinator {
   }()
 
     // MARK: - Coordinator
-  init(delegate : NewsDelegate) {
+  init(delegate : NewsDelegate, apiServer : ApiServer) {
     self.delegate = delegate
+    self.apiServer = apiServer
   }
 
   override func start() {
