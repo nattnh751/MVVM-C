@@ -6,7 +6,19 @@
 //
 
 import Foundation
+import RxSwift
 
+protocol NewsViewModelCoordinatorDelegate {
+  //implement
+}
+enum ArticleCellType {
+    case normal(cellViewModel: ArticleCellViewModel)
+    case error(message: String)
+    case empty
+}
 class NewsViewModel {
-  
+  var coordinatorDelegate : NewsViewModelCoordinatorDelegate?
+  var newsCells: Observable<[ArticleCellType]> {
+      return cells.asObservable()
+  }
 }

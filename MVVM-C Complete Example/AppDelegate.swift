@@ -15,7 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var appCoordinator: AppCoordinator!
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    if #available(iOS 13.0, *) { } else {
+    if #available(iOS 13.0, *) {
+      // on ios 13 this code will be executed from the scene delegate
+    } else {
       window = UIWindow(frame: UIScreen.main.bounds)
       appCoordinator = AppCoordinator(window: window)
       appCoordinator.start()

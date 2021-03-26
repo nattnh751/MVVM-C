@@ -7,14 +7,14 @@
 
 import Foundation
 import UIKit
+
 protocol NewsDelegate  {
   func viewControllerCreated(_ viewController : UINavigationController)
   func didFinish(from coordinator: NewsCoordinator)
 }
+
 class NewsCoordinator: Coordinator {
-  
-    // MARK: - Properties
-  
+    
   let delegate : NewsDelegate
 
   let storyboard = UIStoryboard(name: "News", bundle: nil)
@@ -22,7 +22,7 @@ class NewsCoordinator: Coordinator {
   // MARK: VM / VC's
   lazy var newsViewModel: NewsViewModel! = {
       let viewModel = NewsViewModel()
-//        viewModel.coordinatorDelegate = self
+      viewModel.coordinatorDelegate = self 
       return viewModel
   }()
   
@@ -31,39 +31,45 @@ class NewsCoordinator: Coordinator {
   }()
 
     // MARK: - Coordinator
-  init(delegate : NewsProtocol) {
+  init(delegate : NewsDelegate) {
     self.delegate = delegate
   }
 
-    override func start() {
-      let newsVC: NewsViewController = storyboard.instantiateViewController(identifier: "News")
-//      newsVC.viewModel = newsViewModel
-      rootNavigationController.setViewControllers([newsVC], animated: false)
-      delegate.viewControllerCreated(rootNavigationController)
-    }
+  override func start() {
+    let newsVC: NewsViewController = storyboard.instantiateViewController(identifier: "News")
+    newsVC.viewModel = newsViewModel
+    rootNavigationController.setViewControllers([newsVC], animated: false)
+    delegate.viewControllerCreated(rootNavigationController) //this is the main view controller, will need to update this line if we want to start this coordinator from elsewhere in the application
+  }
 
-    override func finish() {
-        // Clean up any view controllers. Pop them of the navigation stack for example.
-//        delegate?.didFinish(from: self)
-    }
+  override func finish() {
+      // Clean up any view controllers. Pop them of the navigation stack for example.
+      delegate.didFinish(from: self)
+  }
     
+}
+
+extension NewsCoordinator: NewsViewModelCoordinatorDelegate {
+  
+  
 }
 
 extension NewsCoordinator {
     
-    func goToWebsite(from controller: UIViewController) {
-      //.for same scene
+  func goToWebsite(from controller: UIViewController) {
+    //.for same scene
 //        let viewController: LocationSearchViewController = storyboard.instantiateViewController()
 //        viewController.viewModel = locationSearchViewModel
 //        controller.present(viewController, animated: true, completion: nil)
-    }
-    
-    func goToFavorites(from controller: UIViewController) {
-      // for different scene
+  }
+  
+  func goToFavorites(from controller: UIViewController) {
+    // for different scene
 //        let searchCoordinator = SearchCoordinator(rootViewController: rootNavigationController, apiClient: apiClient, searchInput: validatedState)
 //        searchCoordinator.delegate = self
 //        addChildCoordinator(searchCoordinator)
 //        searchCoordinator.start()
-    }
+    //self.finish?
+  }
   
 }
