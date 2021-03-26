@@ -13,17 +13,18 @@ public struct Articles : Codable {
 public struct Article : Codable {
   var id : Int
   var title : String
-  var createdAt : CustomDecodeableDate<DefaultDateFormatter>
+  private var createdAt : CustomDecodeableDate<DefaultDateFormatter>
   var source : String
   var description : String
   var favorite : Bool
   var heroImage : URL
   var link : URL
+  
+  public func getDateFromCreatedAt() -> Date? {
+    switch createdAt {
+    case .error(_): return nil
+    case .value(let date): return date
+    }
+  }
 }
-class DefaultDateFormatter: StaticDateFormatterInterface {
-    static var value: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        return dateFormatter
-    }()
-}
+

@@ -8,13 +8,11 @@
 import Foundation
 
 struct ArticleCellViewModel {
-  var title : String
-  var description : String
+  var article : Article
 }
 
 extension ArticleCellViewModel {
-    init(article: Article) {
-      self.title = article.title
-      self.description = article.description
-    }
+  init(art: Article) {
+    self.article = art
+  }
 }

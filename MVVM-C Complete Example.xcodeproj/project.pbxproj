@@ -26,7 +26,8 @@
 		0851B4E7260E522A00F8D48F /* articles.json in Resources */ = {isa = PBXBuildFile; fileRef = 0851B4E6260E522A00F8D48F /* articles.json */; };
 		0851B4EC260E52C500F8D48F /* ApiServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0851B4EB260E52C500F8D48F /* ApiServer.swift */; };
 		0851B4F8260E57DB00F8D48F /* ArticleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0851B4F6260E57DB00F8D48F /* ArticleCollectionViewCell.swift */; };
-		0851B4F9260E57DB00F8D48F /* ArticleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0851B4F7260E57DB00F8D48F /* ArticleCollectionViewCell.xib */; };
+		0851B501260E68A800F8D48F /* DefaultDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0851B500260E68A800F8D48F /* DefaultDateFormatter.swift */; };
+		0851B506260E793100F8D48F /* ArticleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0851B505260E793100F8D48F /* ArticleCollectionViewCell.xib */; };
 		6815F74AB42C8F4F92E24179 /* Pods_MVVM_C_Complete_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B923902C7D8696CFD73360D2 /* Pods_MVVM_C_Complete_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -73,7 +74,8 @@
 		0851B4E6260E522A00F8D48F /* articles.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = articles.json; sourceTree = "<group>"; };
 		0851B4EB260E52C500F8D48F /* ApiServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServer.swift; sourceTree = "<group>"; };
 		0851B4F6260E57DB00F8D48F /* ArticleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCollectionViewCell.swift; sourceTree = "<group>"; };
-		0851B4F7260E57DB00F8D48F /* ArticleCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleCollectionViewCell.xib; sourceTree = "<group>"; };
+		0851B500260E68A800F8D48F /* DefaultDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDateFormatter.swift; sourceTree = "<group>"; };
+		0851B505260E793100F8D48F /* ArticleCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleCollectionViewCell.xib; sourceTree = "<group>"; };
 		25E7CF44BD28090327003564 /* Pods-MVVM-C Complete Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVVM-C Complete Example.debug.xcconfig"; path = "Target Support Files/Pods-MVVM-C Complete Example/Pods-MVVM-C Complete Example.debug.xcconfig"; sourceTree = "<group>"; };
 		67F9F2A165633939A59C8F31 /* Pods-MVVM-C Complete Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVVM-C Complete Example.release.xcconfig"; path = "Target Support Files/Pods-MVVM-C Complete Example/Pods-MVVM-C Complete Example.release.xcconfig"; sourceTree = "<group>"; };
 		B923902C7D8696CFD73360D2 /* Pods_MVVM_C_Complete_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MVVM_C_Complete_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -214,7 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				0851B4F6260E57DB00F8D48F /* ArticleCollectionViewCell.swift */,
-				0851B4F7260E57DB00F8D48F /* ArticleCollectionViewCell.xib */,
+				0851B505260E793100F8D48F /* ArticleCollectionViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -223,6 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				0851B4E0260E4C7500F8D48F /* CustomDecodeableDate.swift */,
+				0851B500260E68A800F8D48F /* DefaultDateFormatter.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -359,7 +362,7 @@
 			files = (
 				0851B4E7260E522A00F8D48F /* articles.json in Resources */,
 				0851B44E260D65F600F8D48F /* LaunchScreen.storyboard in Resources */,
-				0851B4F9260E57DB00F8D48F /* ArticleCollectionViewCell.xib in Resources */,
+				0851B506260E793100F8D48F /* ArticleCollectionViewCell.xib in Resources */,
 				0851B44B260D65F600F8D48F /* Assets.xcassets in Resources */,
 				0851B484260D69D400F8D48F /* News.storyboard in Resources */,
 			);
@@ -430,6 +433,7 @@
 			files = (
 				0851B4F8260E57DB00F8D48F /* ArticleCollectionViewCell.swift in Sources */,
 				0851B4C7260E44CF00F8D48F /* ArticleCellViewModel.swift in Sources */,
+				0851B501260E68A800F8D48F /* DefaultDateFormatter.swift in Sources */,
 				0851B48E260D6A2900F8D48F /* AppCoordinator.swift in Sources */,
 				0851B493260D6A9200F8D48F /* NewsCoordinator.swift in Sources */,
 				0851B43F260D65F400F8D48F /* AppDelegate.swift in Sources */,

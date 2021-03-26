@@ -29,7 +29,6 @@ class NewsViewModel {
   
   init(_ apiServer: ApiServer) {
     self.apiServer = apiServer
-    populateMockData()
   }
   
   func populateMockData() {

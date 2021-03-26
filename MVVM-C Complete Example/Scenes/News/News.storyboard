@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8jm-H9-ZkV">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="landscape" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,11 +13,11 @@
             <objects>
                 <viewController storyboardIdentifier="News" id="8jm-H9-ZkV" customClass="NewsViewController" customModule="MVVM_C_Complete_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4m8-Ha-LEL">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="RhE-BL-X53">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="44" y="0.0" width="808" height="393"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BqP-s6-LXZ">
                                     <size key="itemSize" width="184" height="128"/>
@@ -26,46 +25,16 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="articleCell" id="ryp-ST-q4o" customClass="ArticleCollectionViewCell" customModule="MVVM_C_Complete_Example" customModuleProvider="target">
-                                        <rect key="frame" x="57" y="0.0" width="300" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ATM-zU-lpr">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="128"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nBd-bL-jA2">
-                                                    <rect key="frame" x="17" y="53.5" width="154" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="154" id="Nuy-J6-fch"/>
-                                                        <constraint firstAttribute="height" constant="21" id="tK6-JM-gLS"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="nBd-bL-jA2" firstAttribute="centerY" secondItem="ATM-zU-lpr" secondAttribute="centerY" id="27g-XY-9zh"/>
-                                                <constraint firstItem="nBd-bL-jA2" firstAttribute="leading" secondItem="ATM-zU-lpr" secondAttribute="leading" constant="17" id="ttY-fU-JCS"/>
-                                            </constraints>
-                                        </collectionViewCellContentView>
-                                        <color key="backgroundColor" systemColor="systemPurpleColor"/>
-                                        <size key="customSize" width="300" height="128"/>
-                                        <connections>
-                                            <outlet property="articleTitle" destination="nBd-bL-jA2" id="rIt-yC-45d"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
+                                <cells/>
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="uFc-cK-gYZ"/>
                         <color key="backgroundColor" systemColor="systemRedColor"/>
                         <constraints>
-                            <constraint firstItem="RhE-BL-X53" firstAttribute="trailing" secondItem="uFc-cK-gYZ" secondAttribute="trailing" id="ZI5-eA-cH7"/>
-                            <constraint firstItem="RhE-BL-X53" firstAttribute="bottom" secondItem="uFc-cK-gYZ" secondAttribute="bottom" id="koE-1J-Ih6"/>
-                            <constraint firstItem="RhE-BL-X53" firstAttribute="top" secondItem="uFc-cK-gYZ" secondAttribute="top" id="qQa-eZ-Yir"/>
-                            <constraint firstItem="RhE-BL-X53" firstAttribute="leading" secondItem="uFc-cK-gYZ" secondAttribute="leading" id="zew-mc-o7p"/>
+                            <constraint firstItem="RhE-BL-X53" firstAttribute="bottom" secondItem="uFc-cK-gYZ" secondAttribute="bottom" id="5o8-Fg-B7c"/>
+                            <constraint firstItem="RhE-BL-X53" firstAttribute="top" secondItem="uFc-cK-gYZ" secondAttribute="top" id="F3r-TH-yGK"/>
+                            <constraint firstItem="RhE-BL-X53" firstAttribute="trailing" secondItem="uFc-cK-gYZ" secondAttribute="trailing" id="c9u-NL-Hcc"/>
+                            <constraint firstItem="RhE-BL-X53" firstAttribute="leading" secondItem="uFc-cK-gYZ" secondAttribute="leading" id="eYH-AP-Oeb"/>
                         </constraints>
                     </view>
                     <connections>
@@ -74,15 +43,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jgt-wC-CDT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="511.59420289855075" y="-236.38392857142856"/>
+            <point key="canvasLocation" x="510.9375" y="-237.68115942028987"/>
         </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemPurpleColor">
-            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

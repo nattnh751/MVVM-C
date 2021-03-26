@@ -10,8 +10,11 @@ import UIKit
 class ArticleCollectionViewCell: UICollectionViewCell {
 
   @IBOutlet weak var articleTitle: UILabel!
-  @IBOutlet weak var detail: UILabel!
-
+  @IBOutlet weak var hero: UIImageView!
+  @IBOutlet weak var detail: UITextView!
+  @IBOutlet weak var date: UILabel!
+  @IBOutlet weak var source: UILabel!
+  
   var viewModel: ArticleCellViewModel? {
       didSet {
           bindViewModel()
@@ -20,8 +23,8 @@ class ArticleCollectionViewCell: UICollectionViewCell {
 
   private func bindViewModel() {
       if let viewModel = viewModel {
-        articleTitle?.text = "\(viewModel.title)"
-        detail?.text = viewModel.description
+        articleTitle?.text = "\(viewModel.article.title)"
+        detail?.text = viewModel.article.description
       }
   }
 
