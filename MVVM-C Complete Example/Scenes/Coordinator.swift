@@ -24,10 +24,10 @@ class Coordinator {
     }
 
     func removeChildCoordinator(_ coordinator: Coordinator) {
-        if let index = childCoordinators.index(of: coordinator) {
+      if let index = childCoordinators.firstIndex(of: coordinator) {
             childCoordinators.remove(at: index)
         } else {
-            Print("Couldn't remove coordinator: \(coordinator). It's not a child coordinator.")
+            print("Couldn't remove coordinator: \(coordinator). It's not a child coordinator.")
         }
     }
 

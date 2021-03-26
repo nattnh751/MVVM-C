@@ -6,35 +6,37 @@
 //
 
 import Foundation
+import UIKit
+
 class AppCoordinator : Coordinator {
+  
  let window: UIWindow?
- 
- lazy var rootViewController: UINavigationController = {
-     return UINavigationController(rootViewController: UIViewController())
- }()
- 
- let apiClient: ApiClient = {
-     let configuration = URLSessionConfiguration.default
-     configuration.httpAdditionalHeaders = ["Content-Type": "application/json; charset=utf-8"]
-     let apiClient = ApiClient(configuration: configuration)
-     return apiClient
- }()
 
  init(window: UIWindow?) {
      self.window = window
  }
 
  override func start() {
-     guard let window = window else {
-         return
-     }
-
-     window.rootViewController = rootViewController
-     window.makeKeyAndVisible()
+    let newwsCoordinator = NewsCoordinator(delegate: self)
+    addChildCoordinator(newwsCoordinator)
+    newwsCoordinator.start()
  }
 
  override func finish() {
-
+    
  }
 
+}
+extension AppCoordinator : NewsDelegate {
+  func viewControllerCreated(_ viewController : UINavigationController) {
+    guard let window = window else {
+         return
+    }
+    window.rootViewController = viewController
+    window.makeKeyAndVisible()
+  }
+  
+  func didFinish(from coordinator: NewsCoordinator) {
+    removeChildCoordinator(coordinator)
+  }
 }
