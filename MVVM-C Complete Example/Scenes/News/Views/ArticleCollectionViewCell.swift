@@ -27,5 +27,12 @@ class ArticleCollectionViewCell: UICollectionViewCell {
         detail?.text = viewModel.article.description
       }
   }
-
+  
+  func didSelectFavorite() {
+    viewModel?.favoriteButtonSelected()
+  }
+  
+  func didUnSelectFavorite() {
+    viewModel?.UnFavoriteButtonSelected()
+  }
 }

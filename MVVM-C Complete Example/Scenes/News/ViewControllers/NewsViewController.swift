@@ -10,10 +10,13 @@ import UIKit
 import RxSwift
 
 class NewsViewController : UIViewController {
-  var viewModel : NewsViewModel?
   let disposeBag = DisposeBag()
   @IBOutlet var collectionView: UICollectionView!
+  var viewModel: NewsViewModelViewModelType? {
+      didSet {
 
+      }
+  }
   public override func viewDidLoad() {
     super.viewDidLoad()
     collectionView.collectionViewLayout = {
@@ -22,11 +25,7 @@ class NewsViewController : UIViewController {
         return flowLayout
     }()
     bindViewModel()
-    viewModel?.populateMockData()
-  }
-  
-  public override func viewWillAppear(_ animated: Bool) {
-
+    viewModel?.start()
   }
   
   func bindViewModel() {
@@ -34,8 +33,9 @@ class NewsViewController : UIViewController {
     if let model = viewModel {
       model.newsCells.bind(to: self.collectionView.rx.items(cellIdentifier: "articleCell", cellType: ArticleCollectionViewCell.self)) { index, element, cell in
         switch element {
-        case .normal(let viewModel):
-          cell.viewModel = viewModel
+        case .normal(let articleViewModel):
+          cell.viewModel?.viewControllerDelegate = self
+          cell.viewModel = articleViewModel
         case .error(let message):
           cell.isUserInteractionEnabled = false
         case .empty:
@@ -47,9 +47,7 @@ class NewsViewController : UIViewController {
       switch art {
       case .normal(let articleViewModel):
         if let model = self.viewModel {
-          if let delegate = model.coordinatorDelegate {
-            delegate.didSelectArticle(self, article: articleViewModel.article)
-          }
+          model.didSelectArticle(self, article: articleViewModel.article)
         }
       case .error(let message):
         print(message)
@@ -68,4 +66,20 @@ extension NewsViewController : UICollectionViewDelegateFlowLayout {
     let cellWidth = (width) / 1
     return CGSize(width: cellWidth, height: 150)
   }
+}
+
+extension NewsViewController : ArticleCellViewModelViewControllerDelegate {
+  
+  func UnFavoriteSelected(_ article: Article) {
+    if let model = self.viewModel {
+      model.didRemoveFavoriteArticle(self, article: article)
+    }
+  }
+  
+  func favoriteSelected(_ article : Article) {
+    if let model = self.viewModel {
+      model.didFavoriteArticle(self, article: article)
+    }
+  }
+  
 }

@@ -52,7 +52,7 @@ class NewsCoordinator: Coordinator {
 }
 
 extension NewsCoordinator: NewsViewModelCoordinatorDelegate {
-  func didSelectArticle(_ viewController : UIViewController, article : Article) {
+  func didSelectArticle(_ viewController: UIViewController, article: Article, viewModel: NewsViewModel) {
     self.goToWebsite(from: viewController, url: article.link) // navigate to articles website
   }
 }
