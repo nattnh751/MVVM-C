@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SafariServices
 
 protocol NewsDelegate  {
   func viewControllerCreated(_ viewController : UINavigationController)
@@ -51,17 +52,16 @@ class NewsCoordinator: Coordinator {
 }
 
 extension NewsCoordinator: NewsViewModelCoordinatorDelegate {
-  
-  
+  func didSelectArticle(_ viewController : UIViewController, article : Article) {
+    self.goToWebsite(from: viewController, url: article.link) // navigate to articles website
+  }
 }
 
 extension NewsCoordinator {
     
-  func goToWebsite(from controller: UIViewController) {
-    //.for same scene
-//        let viewController: LocationSearchViewController = storyboard.instantiateViewController()
-//        viewController.viewModel = locationSearchViewModel
-//        controller.present(viewController, animated: true, completion: nil)
+  func goToWebsite(from controller: UIViewController, url : URL) {
+    let vc = SFSafariViewController(url: url)
+    controller.present(vc, animated: true)
   }
   
   func goToFavorites(from controller: UIViewController) {
@@ -70,7 +70,7 @@ extension NewsCoordinator {
 //        searchCoordinator.delegate = self
 //        addChildCoordinator(searchCoordinator)
 //        searchCoordinator.start()
-    //self.finish?
+    //  self.finish?
   }
   
 }

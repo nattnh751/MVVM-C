@@ -11,6 +11,7 @@ import RxCocoa
 	
 protocol NewsViewModelCoordinatorDelegate {
   //implement
+  func didSelectArticle(_ viewController : UIViewController, article : Article)
 }
 enum ArticleCellType {
     case normal(cellViewModel: ArticleCellViewModel)
@@ -30,7 +31,6 @@ class NewsViewModel {
   init(_ apiServer: ApiServer) {
     self.apiServer = apiServer
   }
-  
   func populateMockData() {
     apiServer.getArticles().subscribe(
         onNext: { [weak self] articles in

@@ -21,10 +21,12 @@ class NewsViewController : UIViewController {
         flowLayout.scrollDirection = .vertical
         return flowLayout
     }()
-  }
-  public override func viewWillAppear(_ animated: Bool) {
     bindViewModel()
     viewModel?.populateMockData()
+  }
+  
+  public override func viewWillAppear(_ animated: Bool) {
+
   }
   
   func bindViewModel() {
@@ -43,8 +45,12 @@ class NewsViewController : UIViewController {
     }
     self.collectionView.rx.modelSelected(ArticleCellType.self).subscribe(onNext: { art in
       switch art {
-      case .normal(let viewModel):
-        print(viewModel.article.title)
+      case .normal(let articleViewModel):
+        if let model = self.viewModel {
+          if let delegate = model.coordinatorDelegate {
+            delegate.didSelectArticle(self, article: articleViewModel.article)
+          }
+        }
       case .error(let message):
         print(message)
       case .empty:
@@ -52,20 +58,6 @@ class NewsViewController : UIViewController {
       }
     }).disposed(by: disposeBag)
     self.collectionView.rx.setDelegate(self).disposed(by: disposeBag)
-
-  
-//
-//      viewModel
-//          .onShowError
-//          .map { [weak self] in self?.presentSingleButtonDialog(alert: $0)}
-//          .subscribe()
-//          .disposed(by: disposeBag)
-//
-//      viewModel
-//          .onShowLoadingHud
-//          .map { [weak self] in self?.setLoadingHud(visible: $0) }
-//          .subscribe()
-//          .disposed(by: disposeBag)
   }
 
 }
@@ -73,7 +65,7 @@ class NewsViewController : UIViewController {
 extension NewsViewController : UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     let width = collectionView.bounds.width
-    let cellWidth = (width) / 1 // compute your cell width
+    let cellWidth = (width) / 1
     return CGSize(width: cellWidth, height: 150)
   }
 }
