@@ -107,7 +107,7 @@ extension NewsViewModel : NewsViewModelViewModelType {
       switch item {
       case .normal(let articleViewModel):
         if(articleViewModel.article.id != art.id) {
-          return true
+          return true //this returns every item except for the item that needs to be updated and re added
         }
       case .error(_):
         return false
@@ -116,8 +116,8 @@ extension NewsViewModel : NewsViewModelViewModelType {
       }
       return false
     }
-    art.favorite = isFavorite
-    oldItemsWithoutNewItem.append(.normal(cellViewModel: ArticleCellViewModel(article: art , vm.viewControllerDelegate)))
+    vm.article.favorite = isFavorite
+    oldItemsWithoutNewItem.append(.normal(cellViewModel: vm))
     self.cells.accept(oldItemsWithoutNewItem)
   }
 }
