@@ -61,6 +61,7 @@ extension NewsCoordinator {
     
   func goToWebsite(from controller: UIViewController, url : URL) {
     let vc = SFSafariViewController(url: url)
+    vc.modalPresentationStyle = .formSheet
     controller.present(vc, animated: true)
   }
   

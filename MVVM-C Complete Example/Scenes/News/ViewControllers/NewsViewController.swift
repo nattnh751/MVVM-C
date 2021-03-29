@@ -32,12 +32,9 @@ class NewsViewController : UIViewController {
     self.collectionView.register(UINib(nibName: "ArticleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "articleCell")
     if let model = newsViewModel {
       model.newsCells.bind(to: self.collectionView.rx.items(cellIdentifier: "articleCell", cellType: ArticleCollectionViewCell.self)) { index, element, cell in
-        switch element {
-        case .normal(let articleViewModel):
-          cell.articleCellViewModel = articleViewModel
-        case .error(let message):
-          cell.isUserInteractionEnabled = false
-        case .empty:
+        if let vm = ArticleCellType.getArticleViewModelOrNil(type: element) {
+          cell.articleCellViewModel = vm
+        } else {
           cell.isUserInteractionEnabled = false
         }
       }.disposed(by: disposeBag)
