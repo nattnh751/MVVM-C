@@ -6,10 +6,33 @@
 //
 
 import Foundation
-enum ArticleCellType {
-    case normal(cellViewModel: ArticleCellViewModel)
-    case error(message: String)
-    case empty
+enum ArticleCellType : Equatable {
+  
+  static func == (lhs: ArticleCellType, rhs: ArticleCellType) -> Bool {
+    if let leftViewModel = getArticleViewModelOrNil(type: lhs) {
+      if let rightViewModel = getArticleViewModelOrNil(type: rhs) {
+        if(leftViewModel.article.id == rightViewModel.article.id) {
+          return true
+        }
+      }
+    }
+    return false
+  }
+  
+  public static func getArticleViewModelOrNil(type : ArticleCellType) -> ArticleCellViewModel? {
+    switch type {
+    case .normal(let articleViewModel):
+      return articleViewModel //this returns every item except for the item that needs to be updated and re added
+    case .error(_):
+      return nil
+    case .empty:
+      return nil
+    }
+  }
+  
+  case normal(cellViewModel: ArticleCellViewModel)
+  case error(message: String)
+  case empty
 }
 protocol ArticleCellViewModelDelegate {
   func favoriteButtonSelected()

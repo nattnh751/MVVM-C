@@ -80,20 +80,13 @@ extension NewsViewModel : NewsViewModelViewModelType {
   
   fileprivate func updateFavorite(_ vm : ArticleCellViewModel, _ isFavorite : Bool) {
     var oldItemsWithoutNewItem = self.cells.value.filter { item -> Bool in
-      switch item {
-      case .normal(let articleViewModel):
-        if(articleViewModel.article.id != vm.article.id) {
-          return true //this returns every item except for the item that needs to be updated and re added
-        }
-      case .error(_):
-        return false
-      case .empty:
-        return false
+      if let articleViewModel = ArticleCellType.getArticleViewModelOrNil(type: item) {
+        return articleViewModel.article.id != vm.article.id
       }
       return false
     }
     vm.article.favorite = isFavorite
-    oldItemsWithoutNewItem.append(.normal(cellViewModel: vm))
+    oldItemsWithoutNewItem.append(.normal(cellViewModel: vm)) //this should never happen
     self.cells.accept(oldItemsWithoutNewItem)
   }
 }

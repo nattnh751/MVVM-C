@@ -42,6 +42,7 @@ class NewsViewController : UIViewController {
         }
       }.disposed(by: disposeBag)
     }
+    
     self.collectionView.rx.modelSelected(ArticleCellType.self).subscribe(onNext: { art in
       switch art {
       case .normal(let articleViewModel):
