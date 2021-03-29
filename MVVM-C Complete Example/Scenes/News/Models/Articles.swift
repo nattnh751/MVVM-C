@@ -20,10 +20,10 @@ public struct Article : Codable {
   var heroImage : URL
   var link : URL
   
-  public func getDateFromCreatedAt() -> Date? {
+  public func getDateFromCreatedAt() -> String? {
     switch createdAt {
     case .error(_): return nil
-    case .value(let date): return date
+    case .value(let date): return date.description
     }
   }
 }

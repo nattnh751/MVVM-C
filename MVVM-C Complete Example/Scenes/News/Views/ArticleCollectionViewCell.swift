@@ -14,25 +14,51 @@ class ArticleCollectionViewCell: UICollectionViewCell {
   @IBOutlet weak var detail: UITextView!
   @IBOutlet weak var date: UILabel!
   @IBOutlet weak var source: UILabel!
-  
-  var viewModel: ArticleCellViewModel? {
+  @IBOutlet weak var favoriteButton: UIButton!
+
+  var articleCellViewModel: ArticleCellViewModel? {
       didSet {
           bindViewModel()
       }
   }
 
   private func bindViewModel() {
-      if let viewModel = viewModel {
+      if let viewModel = articleCellViewModel {
         articleTitle?.text = "\(viewModel.article.title)"
         detail?.text = viewModel.article.description
+        date?.text = viewModel.article.getDateFromCreatedAt()
+        source?.text = viewModel.article.source
+        hero?.load(url: viewModel.article.heroImage)
+        if(viewModel.article.favorite) { 
+          favoriteButton?.isHidden = true
+        } else {
+          favoriteButton?.isHidden = false
+
+        }
       }
   }
   
+  @IBAction func selectFavorite(_ sender: Any) {
+    articleCellViewModel?.favoriteButtonSelected()
+  }
   func didSelectFavorite() {
-    viewModel?.favoriteButtonSelected()
+    articleCellViewModel?.favoriteButtonSelected()
   }
   
   func didUnSelectFavorite() {
-    viewModel?.UnFavoriteButtonSelected()
+    articleCellViewModel?.UnFavoriteButtonSelected()
   }
+}
+extension UIImageView {
+    func load(url: URL) {
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.image = image
+                    }
+                }
+            }
+        }
+    }
 }

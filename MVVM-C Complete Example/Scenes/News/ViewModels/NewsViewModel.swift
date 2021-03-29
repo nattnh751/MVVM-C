@@ -13,7 +13,7 @@ protocol NewsViewModelViewModelType { //stuff that is used by the view controlle
   //data
   var newsCells: Observable<[ArticleCellType]> { get }
   // Events
-  func start()
+  func start(_ delegate : ArticleCellViewModelViewControllerDelegate)
 
   func didSelectArticle(_ viewController : UIViewController, article : Article)
   
@@ -37,7 +37,7 @@ class NewsViewModel {
     self.apiServer = apiServer
   }
   
-  func start() {
+  func start(_ delegate : ArticleCellViewModelViewControllerDelegate) {
     apiServer.getArticles().subscribe(
         onNext: { [weak self] articles in
             guard articles.count > 0 else {
@@ -45,7 +45,7 @@ class NewsViewModel {
                 return
             }
 
-            self?.cells.accept(articles.compactMap { .normal(cellViewModel: ArticleCellViewModel(article: $0 )) }) //need to add a view model
+            self?.cells.accept(articles.compactMap { .normal(cellViewModel: ArticleCellViewModel(article: $0 , delegate)) }) //need to add a view model
         },
         onError: { [weak self] error in
             self?.cells.accept([
@@ -69,11 +69,55 @@ extension NewsViewModel : NewsViewModelViewModelType {
   func didSelectArticle(_ viewController : UIViewController, article : Article) {
     coordinatorDelegate?.didSelectArticle(viewController, article: article, viewModel: self)
   }
+  
   func didFavoriteArticle(_ viewController : UIViewController, article : Article) {
-    //TODO: add favorite, update data
+      for item in self.cells.value {
+        switch item {
+        case .normal(let articleViewModel):
+          if(articleViewModel.article.id == article.id) {
+            updateFavorite(articleViewModel, true)
+          }
+        case .error(let message):
+          print(message)
+        case .empty:
+          print("empty")
+        }
+      }
   }
+  
   func didRemoveFavoriteArticle(_ viewController : UIViewController, article : Article) {
     //TODO: remove favorite, update data
+    for item in self.cells.value {
+      switch item {
+      case .normal(let articleViewModel):
+        if(articleViewModel.article.id == article.id) {
+          updateFavorite(articleViewModel, false)
+        }
+      case .error(let message):
+        print(message)
+      case .empty:
+        print("empty")
+      }
+    }
   }
-
+  
+  fileprivate func updateFavorite(_ vm : ArticleCellViewModel, _ isFavorite : Bool) {
+    var art = vm.article
+    var oldItemsWithoutNewItem = self.cells.value.filter { item -> Bool in
+      switch item {
+      case .normal(let articleViewModel):
+        if(articleViewModel.article.id != art.id) {
+          return true
+        }
+      case .error(_):
+        return false
+      case .empty:
+        return false
+      }
+      return false
+    }
+    art.favorite = isFavorite
+    oldItemsWithoutNewItem.append(.normal(cellViewModel: ArticleCellViewModel(article: art , vm.viewControllerDelegate)))
+    self.cells.accept(oldItemsWithoutNewItem)
+  }
 }

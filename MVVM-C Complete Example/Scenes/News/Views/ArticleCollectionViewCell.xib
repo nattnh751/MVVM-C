@@ -41,6 +41,14 @@
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="hba-pw-xgG">
+                        <rect key="frame" x="306" y="97" width="81" height="33"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" title="favorite"/>
+                        <connections>
+                            <action selector="selectFavorite:" destination="gTV-IL-0wX" eventType="touchUpInside" id="0lE-uG-8qn"/>
+                        </connections>
+                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rO6-vu-voK">
                         <rect key="frame" x="196" y="0.0" width="181" height="17"/>
                         <constraints>
@@ -79,6 +87,7 @@
                 <outlet property="articleTitle" destination="kXY-mx-9pk" id="jqR-FV-gxS"/>
                 <outlet property="date" destination="rO6-vu-voK" id="kgb-VD-meB"/>
                 <outlet property="detail" destination="CbP-Yi-txo" id="qQi-ul-rcz"/>
+                <outlet property="favoriteButton" destination="hba-pw-xgG" id="asj-hH-vOV"/>
                 <outlet property="hero" destination="zOQ-jw-KF3" id="9b9-9n-cMY"/>
             </connections>
             <point key="canvasLocation" x="41.304347826086961" y="174.77678571428569"/>

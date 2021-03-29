@@ -12,7 +12,7 @@ import RxSwift
 class NewsViewController : UIViewController {
   let disposeBag = DisposeBag()
   @IBOutlet var collectionView: UICollectionView!
-  var viewModel: NewsViewModelViewModelType? {
+  var newsViewModel: NewsViewModelViewModelType? {
       didSet {
 
       }
@@ -25,17 +25,16 @@ class NewsViewController : UIViewController {
         return flowLayout
     }()
     bindViewModel()
-    viewModel?.start()
+    newsViewModel?.start(self)
   }
   
   func bindViewModel() {
     self.collectionView.register(UINib(nibName: "ArticleCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "articleCell")
-    if let model = viewModel {
+    if let model = newsViewModel {
       model.newsCells.bind(to: self.collectionView.rx.items(cellIdentifier: "articleCell", cellType: ArticleCollectionViewCell.self)) { index, element, cell in
         switch element {
         case .normal(let articleViewModel):
-          cell.viewModel?.viewControllerDelegate = self
-          cell.viewModel = articleViewModel
+          cell.articleCellViewModel = articleViewModel
         case .error(let message):
           cell.isUserInteractionEnabled = false
         case .empty:
@@ -46,7 +45,7 @@ class NewsViewController : UIViewController {
     self.collectionView.rx.modelSelected(ArticleCellType.self).subscribe(onNext: { art in
       switch art {
       case .normal(let articleViewModel):
-        if let model = self.viewModel {
+        if let model = self.newsViewModel {
           model.didSelectArticle(self, article: articleViewModel.article)
         }
       case .error(let message):
@@ -71,13 +70,13 @@ extension NewsViewController : UICollectionViewDelegateFlowLayout {
 extension NewsViewController : ArticleCellViewModelViewControllerDelegate {
   
   func UnFavoriteSelected(_ article: Article) {
-    if let model = self.viewModel {
+    if let model = self.newsViewModel {
       model.didRemoveFavoriteArticle(self, article: article)
     }
   }
   
   func favoriteSelected(_ article : Article) {
-    if let model = self.viewModel {
+    if let model = self.newsViewModel {
       model.didFavoriteArticle(self, article: article)
     }
   }

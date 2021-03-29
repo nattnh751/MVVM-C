@@ -39,7 +39,7 @@ class NewsCoordinator: Coordinator {
 
   override func start() {
     let newsVC: NewsViewController = storyboard.instantiateViewController(identifier: "News")
-    newsVC.viewModel = newsViewModel
+    newsVC.newsViewModel = newsViewModel
     rootNavigationController.setViewControllers([newsVC], animated: false)
     delegate.viewControllerCreated(rootNavigationController) //this is the main view controller, will need to update this line if we want to start this coordinator from elsewhere in the application
   }

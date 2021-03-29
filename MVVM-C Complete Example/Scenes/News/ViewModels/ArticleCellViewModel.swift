@@ -23,21 +23,18 @@ protocol ArticleCellViewModelViewControllerDelegate {
 
 class ArticleCellViewModel { //  need to change this to look like the NewsViewModel and make it have a delegate that will live between the viewcontroller showing it and each of it's cells
   var article : Article
-  var viewControllerDelegate : ArticleCellViewModelViewControllerDelegate?
-  init(article: Article) {
+  var viewControllerDelegate : ArticleCellViewModelViewControllerDelegate
+  init(article: Article, _ delegate: ArticleCellViewModelViewControllerDelegate) {
     self.article = article
+    self.viewControllerDelegate = delegate
   }
 }
 
 extension ArticleCellViewModel : ArticleCellViewModelDelegate {
   func favoriteButtonSelected() {
-    if let delegate = viewControllerDelegate {
-      delegate.favoriteSelected(self.article)
-    }
+    viewControllerDelegate.favoriteSelected(self.article)
   }
   func UnFavoriteButtonSelected() {
-    if let delegate = viewControllerDelegate {
-      delegate.UnFavoriteSelected(self.article)
-    }
+    viewControllerDelegate.UnFavoriteSelected(self.article)
   }
 }
