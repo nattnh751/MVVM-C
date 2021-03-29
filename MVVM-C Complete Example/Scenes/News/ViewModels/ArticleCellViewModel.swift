@@ -17,8 +17,8 @@ protocol ArticleCellViewModelDelegate {
 }
 
 protocol ArticleCellViewModelViewControllerDelegate {
-  func favoriteSelected(_ article : Article)
-  func UnFavoriteSelected(_ article : Article)
+  func favoriteSelected(_ articleCellViewModel : ArticleCellViewModel)
+  func UnFavoriteSelected(_ articleCellViewModel : ArticleCellViewModel)
 }
 
 class ArticleCellViewModel { //  need to change this to look like the NewsViewModel and make it have a delegate that will live between the viewcontroller showing it and each of it's cells
@@ -32,9 +32,9 @@ class ArticleCellViewModel { //  need to change this to look like the NewsViewMo
 
 extension ArticleCellViewModel : ArticleCellViewModelDelegate {
   func favoriteButtonSelected() {
-    viewControllerDelegate.favoriteSelected(self.article)
+    viewControllerDelegate.favoriteSelected(self)
   }
   func UnFavoriteButtonSelected() {
-    viewControllerDelegate.UnFavoriteSelected(self.article)
+    viewControllerDelegate.UnFavoriteSelected(self)
   }
 }

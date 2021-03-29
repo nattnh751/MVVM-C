@@ -17,9 +17,9 @@ protocol NewsViewModelViewModelType { //stuff that is used by the view controlle
 
   func didSelectArticle(_ viewController : UIViewController, article : Article)
   
-  func didFavoriteArticle(_ viewController : UIViewController, article : Article)
+  func didFavoriteArticle(_ viewController : UIViewController, articleViewModel : ArticleCellViewModel)
   
-  func didRemoveFavoriteArticle(_ viewController : UIViewController, article : Article)
+  func didRemoveFavoriteArticle(_ viewController : UIViewController, articleViewModel : ArticleCellViewModel)
 
 }
 
@@ -70,43 +70,19 @@ extension NewsViewModel : NewsViewModelViewModelType {
     coordinatorDelegate?.didSelectArticle(viewController, article: article, viewModel: self)
   }
   
-  func didFavoriteArticle(_ viewController : UIViewController, article : Article) {
-      for item in self.cells.value {
-        switch item {
-        case .normal(let articleViewModel):
-          if(articleViewModel.article.id == article.id) {
-            updateFavorite(articleViewModel, true)
-          }
-        case .error(let message):
-          print(message)
-        case .empty:
-          print("empty")
-        }
-      }
+  func didFavoriteArticle(_ viewController : UIViewController, articleViewModel : ArticleCellViewModel) {
+    updateFavorite(articleViewModel, true)
   }
   
-  func didRemoveFavoriteArticle(_ viewController : UIViewController, article : Article) {
-    //TODO: remove favorite, update data
-    for item in self.cells.value {
-      switch item {
-      case .normal(let articleViewModel):
-        if(articleViewModel.article.id == article.id) {
-          updateFavorite(articleViewModel, false)
-        }
-      case .error(let message):
-        print(message)
-      case .empty:
-        print("empty")
-      }
-    }
+  func didRemoveFavoriteArticle(_ viewController : UIViewController, articleViewModel : ArticleCellViewModel) {
+    updateFavorite(articleViewModel, false)
   }
   
   fileprivate func updateFavorite(_ vm : ArticleCellViewModel, _ isFavorite : Bool) {
-    var art = vm.article
     var oldItemsWithoutNewItem = self.cells.value.filter { item -> Bool in
       switch item {
       case .normal(let articleViewModel):
-        if(articleViewModel.article.id != art.id) {
+        if(articleViewModel.article.id != vm.article.id) {
           return true //this returns every item except for the item that needs to be updated and re added
         }
       case .error(_):

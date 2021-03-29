@@ -69,15 +69,15 @@ extension NewsViewController : UICollectionViewDelegateFlowLayout {
 
 extension NewsViewController : ArticleCellViewModelViewControllerDelegate {
   
-  func UnFavoriteSelected(_ article: Article) {
+  func UnFavoriteSelected(_ articleViewModel: ArticleCellViewModel) {
     if let model = self.newsViewModel {
-      model.didRemoveFavoriteArticle(self, article: article)
+      model.didRemoveFavoriteArticle(self, articleViewModel: articleViewModel)
     }
   }
   
-  func favoriteSelected(_ article : Article) {
+  func favoriteSelected(_ articleViewModel : ArticleCellViewModel) {
     if let model = self.newsViewModel {
-      model.didFavoriteArticle(self, article: article)
+      model.didFavoriteArticle(self, articleViewModel: articleViewModel)
     }
   }
   
